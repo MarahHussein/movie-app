@@ -31,3 +31,6 @@ http://localhost:3000
 ## License
 
 Copyright (c) 2024-present, Marah Hussein
+
+
+please contact me via my email and send google meet link there. 
