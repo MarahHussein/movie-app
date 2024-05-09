@@ -22,4 +22,7 @@ export const userKeys: (keyof User)[] = [
 	"name",
 	"avatar",
 	"$createdAt",
+	"languages",
+	"genres",
+	"bookmarks"
 ];

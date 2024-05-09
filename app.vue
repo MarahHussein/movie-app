@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 	const authStore = useAuthStore();
+  const profileStore = useProfileStore();
 	await authStore.checkIfStillLoggedIn();
 	const isLoggedIn = computed(() => authStore.loggedIn);
 	watch(isLoggedIn, () => {

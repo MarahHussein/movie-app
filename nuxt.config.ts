@@ -4,15 +4,15 @@ const apiBaseUrl = "https://movies-proxy.vercel.app";
 
 export default defineNuxtConfig({
 	devtools: { enabled: true },
-	// ssr: false,
+	ssr: false,
 	app: {
 		head: {
-			title: "Your movies",
+			title: "Movies Recommender",
 			meta: [
 				{ charset: "utf-8" },
 				{ name: "viewport", content: "width=device-width, initial-scale=1" },
 				{ name: "author", content: "Marah Hussein" },
-				{ name: "description", content: "" },
+				{ name: "description", content: "Movie app with recommendation system" },
 			],
 		},
 	},

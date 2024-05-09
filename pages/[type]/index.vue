@@ -11,7 +11,7 @@ const route = useRoute()
 const type = computed(() => route.params.type as MediaType || 'movie')
 const queries = computed(() => QUERY_LIST[type.value as MediaType])
 
-
+//fff
 </script>
 
 <template>

@@ -18,6 +18,11 @@ export function useAppWrite() {
 	const storage = new Storage(client);
 	const locale = new Locale(client);
 	const avatars = new Avatars(client);
+	const functions = new Functions(client);
+	function updateSimpleRecommender(genres: string[], languages: string[]) : void {
+		const data = {genres, languages}
+		functions.createExecution("simple", JSON.stringify(data)).catch(error => console.log('updateSimpleRecommender',error));
+	}
 	return {
 		client,
 		storage,
@@ -25,5 +30,6 @@ export function useAppWrite() {
 		databases,
 		locale,
 		avatars,
+		updateSimpleRecommender
 	};
 }

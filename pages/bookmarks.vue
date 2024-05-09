@@ -1,5 +1,13 @@
+<script setup lang="ts">
+const profileStore = useProfileStore();
+
+const items = await getMedias(profileStore.bookmarks)
+</script>
+
 <template>
-	<div>
-		bookmarks
-	</div>
+  <AppCList
+      v-if="items"
+      :medialist="items"
+  >
+  </AppCList>
 </template>

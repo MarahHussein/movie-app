@@ -58,7 +58,14 @@ export function getMedia(type: MediaType, id: string): Promise<Media> {
 		include_image_language: "en",
 	});
 }
-
+export function getMedias( ids: string[]): Promise<Media[]> {
+	return Promise.all(ids.map(id =>
+		fetchTMDB(`movie/${id}`, {
+			append_to_response: "videos,credits,images,external_ids,release_dates,combined_credits",
+			include_image_language: "en",
+		})
+	));
+}
 /**
  * Get recommended
  */
@@ -142,5 +149,5 @@ export function getPerson(id: string): Promise<Person> {
  */
 
 export function searchShows(query: string, page = 1) {
-	return fetchTMDB("search/multi", { query, page, include_adult: false });
+	return fetchTMDB("search/movie", { query, page, include_adult: false });
 }

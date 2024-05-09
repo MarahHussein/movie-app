@@ -42,4 +42,22 @@
 	.fa-btn {
 		@apply rounded-lg flex justify-start items-center w-full py-4 px-3 hover:bg-secondary;
 	}
+	.preferences {
+		@apply border border-white/25 p-6 rounded-xl my-6 mx-4;
+	}
+	.preferences legend {
+		@apply text-2xl px-8 text-white/90;
+	}
+	.preferences .options {
+		@apply flex flex-wrap gap-6;
+	}
+	.preferences > div > div {
+		@apply flex items-center justify-start gap-3 p-1;
+	}
+	.preferences input {
+		@apply block;
+	}
+	.preferences label {
+		@apply block whitespace-nowrap text-lg;
+	}
 }

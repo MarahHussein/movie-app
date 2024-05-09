@@ -39,16 +39,10 @@
 				}}</span>
 			</div>
 			<li >
-				<NuxtLink :to="`/profile/${user.$id}`" class="fa-btn">
+				<NuxtLink to="/profile" class="fa-btn">
 					<fai class="fa-icon" icon="user"></fai>
 
 					<span class="fa-text">profile</span>
-				</NuxtLink>
-			</li>
-			<li >
-				<NuxtLink to="account" class="fa-btn">
-					<fai class="fa-icon" icon="gear"></fai>
-					<span class="fa-text">account</span>
 				</NuxtLink>
 			</li>
 			<li >

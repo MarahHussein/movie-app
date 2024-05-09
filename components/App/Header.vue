@@ -14,9 +14,9 @@
 			<nuxt-link to="/movie">
 				<img src="/public/images/icon-nav-movies.svg" alt="Movies Page">
 			</nuxt-link>
-			<nuxt-link to="/tv">
-				<img src="/public/images/icon-nav-tv-series.svg" alt="TV-series Page">
-			</nuxt-link>
+<!--			<nuxt-link to="/tv">-->
+<!--				<img src="/public/images/icon-nav-tv-series.svg" alt="TV-series Page">-->
+<!--			</nuxt-link>-->
 			<nuxt-link to="/bookmarks">
 				<img src="/public/images/icon-nav-bookmark.svg" alt="Bookmark Page">
 			</nuxt-link>

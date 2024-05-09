@@ -9,16 +9,42 @@
 			type: "movie",
 		}
 	);
+  const authStore = useAuthStore();
+  const profileStore = useProfileStore()
+  const bookmarked = computed(()=> {
+    return profileStore.bookmarks?.includes(`${props.item.id}`) ? 'full' :'empty';
+  })
+  const { refValue, open, close } = useToggle();
 
 	const directors = computed(() =>
 		props.item.credits?.crew.filter((person) => person.job === "Director")
 	);
+  const onBookmark = () => {
+    if (authStore.loggedIn) {
+      const id = `${props.item.id}`
+      console.log(id);
+
+      profileStore.bookmarkMovie(id);
+    } else {
+      open();
+    }
+  };
 </script>
 
 <template>
 	<div
-		class="p-4 grid grid-cols-[max-content_1fr] gap-8 items-center mx-auto w-full max-w-[75rem] my-10"
+		class="p-4 grid grid-cols-[max-content_1fr] gap-8 items-center mx-auto w-full max-w-[75rem] my-10 relative"
 	>
+    <button
+        class="absolute top-4 right-4 w-10 h-10 bg-[#00000080] z-30 rounded-full flex items-center justify-center"
+        @click="onBookmark"
+    >
+      <img
+          :src="`/images/icon-bookmark-${bookmarked}.svg`"
+          alt="Bookmark"
+          width="16"
+      />
+    </button>
 		<NuxtImg
 			width="300"
 			height="450"
@@ -106,4 +132,19 @@
 			</div>
 		</div>
 	</div>
+  <LazyBasePopUp v-if="refValue" @close="close">
+    <p class="text-xl mb-4 text-white/85">Please Login so you can rate and bookmark your favorite movies!</p>
+    <div class="flex items-center justify-center gap-4">
+      <NuxtLink
+          to="/login"
+          class="px-8 py-2 bg-myred rounded-[8px] hover:bg-white hover:text-primary text-lg"
+      >Login</NuxtLink
+      >
+      <NuxtLink
+          to="/login"
+          class="px-8 py-2 bg-white/90 rounded-[8px] hover:bg-white/25 text-primary text-lg"
+      >Sign up</NuxtLink
+      >
+    </div>
+  </LazyBasePopUp>
 </template>

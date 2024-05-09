@@ -13,6 +13,11 @@ const id = computed(() => route.params.id as string)
 const [item] = await Promise.all([
   getMedia(type.value, id.value),
 ])
+watchEffect(()=> {
+	if(item ) {
+		console.log(item)
+	}
+})
 
 </script>
 

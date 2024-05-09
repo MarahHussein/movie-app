@@ -22,9 +22,6 @@
 			:key="i.id"
 			:item="i"
 			:type="props.query.type"
-			flex-1
-			w-40
-			md:w-60
 		/>
 	</AppGrid>
 </template>

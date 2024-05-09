@@ -15,6 +15,9 @@ export interface User {
 	name: string;
 	avatar: string;
 	$createdAt: string;
+	languages: string[];
+	genres: string[];
+	bookmarks: string[];
 }
 
 export type MediaType = "movie" | "tv";
@@ -24,6 +27,7 @@ export interface Media {
 	backdrop_path: string;
 	genre_ids: number[];
 	id: string;
+	imdb_id: string;
 	original_language: string;
 	original_title: string;
 	overview: string;
