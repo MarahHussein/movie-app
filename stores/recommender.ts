@@ -1,19 +1,56 @@
+import {da} from "cronstrue/dist/i18n/locales/da";
+
 export const useRecommenderStore = defineStore("recommender", ()=> {
     const appWrite = useAppWrite();
-    const recommender = ref()
-    const authID = useAuthStore().authId;
-    const simpleIds = ref([{type: 'movie', id: '693134'},{type: '', id: ''}])
-    const simple = ref([])
+    const authStore = useAuthStore();
 
-    const updateRecommender = async () => {
-        try {
-            recommender.value= await appWrite.databases.getDocument('appData','recommenders',authID)
-        }catch (error) {
-            console.log(error)
+    const bookMarks  = computed(()=>authStore.authUser?.bookmarks)
+    const genres = computed(()=>authStore.authUser?.genres)
+
+    const recommenderByBookmarks = ref<{recommended: Media[], not_find: []}>()
+    const recommenderByGenres = ref<Media[]>()
+
+
+    async function sendGenres(){
+        if(genres.value) {
+            try {
+                recommenderByGenres.value = await $fetch('http://localhost:8000/recommend_by_genre', {
+                    method: 'POST',
+                    body: {
+                        "genres": genres.value
+                    }
+                })
+            } catch (error) {
+                console.error('Failed to send genres:', error);
+            }
+        }
+
+
+    }
+    async function sendBookmarks(){
+        if(bookMarks.value){
+            try {
+                recommenderByBookmarks.value = await $fetch('http://localhost:8000/recommend_by_bookmark', {
+                    method: 'POST',
+                    body: {
+                        "movie_ids": bookMarks.value
+                    }
+                });
+            } catch (error) {
+                console.error('Failed to send bookmarks:', error);
+                // Handle the error appropriately
+            }
         }
 
     }
+
+    function getRecommendation() {
+        sendGenres()
+        sendBookmarks()
+        console.log('trying to send recommendation');
+    }
+
     return {
-        simple, updateRecommender, simpleIds
+        getRecommendation, recommenderByBookmarks, recommenderByGenres, sendGenres, sendBookmarks
     }
 })

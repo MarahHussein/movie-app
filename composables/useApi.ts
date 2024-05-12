@@ -1,5 +1,5 @@
-import { LRUCache } from "lru-cache";
-import { hash as ohash } from "ohash";
+import {LRUCache} from "lru-cache";
+import {hash as ohash} from "ohash";
 
 // const apiBaseUrl = 'http://localhost:3001'
 const apiBaseUrl = "https://movies-proxy.vercel.app";
@@ -18,6 +18,7 @@ async function _fetchTMDB(
 		params,
 	});
 }
+
 
 export function fetchTMDB(
 	url: string,
@@ -58,12 +59,29 @@ export function getMedia(type: MediaType, id: string): Promise<Media> {
 		include_image_language: "en",
 	});
 }
+
+async function fetchTMDBUncached(
+	url: string,
+	params: Record<string, string | number | boolean | undefined> = {}
+): Promise<any> {
+	try {
+		return await $fetch(url, {
+			baseURL: `${apiBaseUrl}/tmdb`,
+			params,
+		});
+	} catch (error) {
+		console.error("Error fetching data from TMDB:", error);
+		throw error;
+	}
+}
+
 export function getMedias( ids: string[]): Promise<Media[]> {
 	return Promise.all(ids.map(id =>
-		fetchTMDB(`movie/${id}`, {
+		fetchTMDBUncached(`movie/${id}`, {
 			append_to_response: "videos,credits,images,external_ids,release_dates,combined_credits",
 			include_image_language: "en",
 		})
+
 	));
 }
 /**

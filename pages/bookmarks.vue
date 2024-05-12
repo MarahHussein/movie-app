@@ -1,7 +1,10 @@
 <script setup lang="ts">
 const profileStore = useProfileStore();
 
-const items = await getMedias(profileStore.bookmarks)
+const {data: items,refresh} = await useAsyncData('items',
+    ()=>getMedias(profileStore.bookmarks))
+setTimeout(refresh, 500);
+
 </script>
 
 <template>

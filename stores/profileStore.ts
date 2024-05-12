@@ -18,6 +18,8 @@ export const useProfileStore = defineStore("profile", () => {
 				);
 				// appWrite.updateSimpleRecommender(genres);
 				console.log("preferences updated:", genres);
+				authStore.getAuthUser()
+				useRecommenderStore().getRecommendation();
 			}
 		} catch (error) {
 			console.log("Failed to update languages", "e", `${error}`);
@@ -47,6 +49,7 @@ export const useProfileStore = defineStore("profile", () => {
 			}).then(res => {
 				authStore.getAuthUser(); // Refresh auth user data
 				console.log('Update completed and user refreshed');
+				useRecommenderStore().getRecommendation();
 			});
 		}
 	}
