@@ -14,7 +14,7 @@ export const useRecommenderStore = defineStore("recommender", ()=> {
     async function sendGenres(){
         if(genres.value) {
             try {
-                recommenderByGenres.value = await $fetch('http://localhost:8000/recommend_by_genre', {
+                recommenderByGenres.value = await $fetch('https://f-sys-recommender.onrender.com/recommend_by_genre', {
                     method: 'POST',
                     body: {
                         "genres": genres.value
@@ -30,7 +30,7 @@ export const useRecommenderStore = defineStore("recommender", ()=> {
     async function sendBookmarks(){
         if(bookMarks.value){
             try {
-                recommenderByBookmarks.value = await $fetch('http://localhost:8000/recommend_by_bookmark', {
+                recommenderByBookmarks.value = await $fetch('https://f-sys-recommender.onrender.com/recommend_by_bookmark', {
                     method: 'POST',
                     body: {
                         "movie_ids": bookMarks.value
